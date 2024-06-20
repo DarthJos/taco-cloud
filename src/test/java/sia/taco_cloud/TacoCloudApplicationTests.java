@@ -8,6 +8,7 @@ class TacoCloudApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("\nJR info: Context Loaded...");
 	}
 
 }
