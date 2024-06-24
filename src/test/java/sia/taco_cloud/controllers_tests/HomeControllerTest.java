@@ -16,11 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import sia.taco_cloud.TacoCloudApplication;
 import sia.taco_cloud.controllers.HomeController;
 
 @WebMvcTest(HomeController.class)
-public class HomeControllerTest {
+class HomeControllerTest {
 
     private static Logger logger = LoggerFactory.getLogger(HomeControllerTest.class);
 
@@ -28,7 +27,7 @@ public class HomeControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testHomePage() throws Exception {
+    void testHomePage() throws Exception {
         logger.info("JR --> Testing Home page...");
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
