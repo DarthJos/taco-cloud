@@ -1,15 +1,9 @@
 package sia.taco_cloud.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import sia.taco_cloud.TacoCloudApplication;
+import org.springframework.web.bind.annotation.*;
 import sia.taco_cloud.model.Ingredient;
 import sia.taco_cloud.model.Ingredient.Type;
 import sia.taco_cloud.model.Taco;
@@ -25,11 +19,10 @@ import java.util.stream.Collectors;
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
 
-    private static final Logger logger = LoggerFactory.getLogger(TacoCloudApplication.class);
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        logger.info("JR --> addIngredientsToModel()");
+        log.info("JR --> addIngredientsToModel()");
         List<Ingredient> ingredients = Arrays.asList(
                 new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
                 new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
@@ -51,24 +44,33 @@ public class DesignTacoController {
 
     @ModelAttribute(name = "tacoOrder")
     public TacoOrder order() {
-        logger.info("JR --> order()");
+        log.info("JR --> order()");
         return new TacoOrder();
     }
 
     @ModelAttribute(name = "taco")
     public Taco taco() {
-        logger.info("JR --> taco()");
+        log.info("JR --> taco()");
         return new Taco();
     }
 
     @GetMapping
     public String showDesignForm() {
-        logger.info("JR --> Accesing desing...");
+        log.info("JR --> Accesing desing...");
         return "design";
     }
 
+    @PostMapping
+    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {
+
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco: {}", taco);
+
+        return "redirect:/orders/current";
+    }
+
     private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-        logger.info("JR --> filterByType()");
+        log.info("JR --> filterByType()");
         return ingredients.stream().filter(x->x.getType().equals(type)).collect(Collectors.toList());
     }
 }
