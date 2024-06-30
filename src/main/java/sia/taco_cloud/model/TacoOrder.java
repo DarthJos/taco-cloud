@@ -1,10 +1,12 @@
 package sia.taco_cloud.model;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Data
 public class TacoOrder {
 
@@ -20,6 +22,7 @@ public class TacoOrder {
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco (Taco taco) {
+        log.info("JR--> addTaco()");
         this.tacos.add(taco);
     }
 }
