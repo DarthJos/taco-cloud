@@ -16,12 +16,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import sia.taco_cloud.controllers.HomeController;
+import sia.taco_cloud.controllers.WebConfig;
 
-@WebMvcTest(HomeController.class)
+@WebMvcTest(WebConfig.class)
 class HomeControllerTest {
 
-    private static Logger logger = LoggerFactory.getLogger(HomeControllerTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(HomeControllerTest.class);
 
     @Autowired
     private MockMvc mockMvc;
